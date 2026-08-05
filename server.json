@@ -1,0 +1,44 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "ru.parsee/parsee",
+  "description": "Сбор и мониторинг товаров Ozon и Wildberries: цены, наличие, рейтинг, отзывы, скидка постоянного покупателя (СПП). Работает на компьютере продавца вместе с приложением ПАРСИ.",
+  "version": "2.2.0",
+  "websiteUrl": "https://parsee.ru",
+  "repository": {
+    "url": "https://github.com/parsee-ru/MCP",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "http://127.0.0.1:7317/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer <ключ доступа>. Ключ выдаёт приложение ПАРСИ: раздел «Подключение ИИ». Ключ локальный, наружу не уходит.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "requirements": {
+      "application": {
+        "name": "ПАРСИ",
+        "url": "https://parsee.ru",
+        "platform": "Windows",
+        "reason": "MCP-сервер входит в состав приложения и слушает только 127.0.0.1. Без установленного и запущенного ПАРСИ подключаться не к чему: сбор идёт с компьютера продавца, под его сессиями Ozon и Wildberries."
+      }
+    },
+    "capabilities": {
+      "tools": 28,
+      "readOnlyTools": 15,
+      "marketplaces": [
+        "ozon.ru",
+        "wildberries.ru"
+      ],
+      "dataLocation": "локально, на компьютере пользователя"
+    }
+  }
+}
